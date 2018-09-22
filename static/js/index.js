@@ -19,7 +19,7 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
 
     var media = null;
     if (navigator.mediaDevices) {
-        media = navigator.mediaDevices.getUserMedia({video : true});
+        media = navigator.mediaDevices.getUserMedia({video : {facingMode: "user"}});
         alert("mediadevice")
     } else if (navigator.getUserMedia) {
         media = navigator.getUserMedia({video : true});
@@ -40,7 +40,7 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     }).catch(function(err){
         console.log(err);
     })
-
+    /*
     function drawLoop() {
         requestAnimationFrame(drawLoop);
         var positions = ctracker.getCurrentPosition();
@@ -48,5 +48,6 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
         ctracker.draw(canvas);
     }
     drawLoop();
+    */
 
 })();
