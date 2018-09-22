@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% set v_bulma = "0.7.1"%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>decolo</title>
+    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/{{v_bulma}}/css/bulma.min.css" />
+    {% block header %}{% endblock %}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
+</head>
+<body>
+    <section class="container">
+        {% block main %}{% endblock %}
+    </section>
+</body>
