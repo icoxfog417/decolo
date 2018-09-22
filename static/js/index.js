@@ -17,17 +17,21 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     ctracker.init();
     ctracker.start(video)
 
-    var media = navigator.mediaDevices.getUserMedia(
-        {video: true, audio: false}
-    )
+    var media = null;
+    if (navigator.mediaDevices) {
+        media = navigator.mediaDevices.getUserMedia({video : true});
+    } else if (navigator.getUserMedia) {
+        media = navigator.getUserMedia({video : true});
+    }
+    
     media.then(function(stream){
         if ("srcObject" in video) {
             video.srcObject = stream;
         } else {
             video.src = (window.URL && window.URL.createObjectURL(stream));
         }
-        vidio.onloadedmetadata = function() {
-            vidio.play();
+        video.onloadedmetadata = function() {
+            video.play();
         }
     }).catch(function(err){
         console.log(err);
