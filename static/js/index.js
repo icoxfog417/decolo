@@ -21,7 +21,17 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     if (navigator.mediaDevices) {
         media = navigator.mediaDevices.getUserMedia({video : true});
     } else if (navigator.getUserMedia) {
-        media = navigator.getUserMedia({video : true});
+        //media = navigator.getUserMedia({video : true}, );
+        navigator.getUserMedia({audio : false, video : {
+            facingMode: "user" // フロントカメラにアクセス
+          }}, successCallback, errorCallback);
+        function successCallback(stream) {
+        video.srcObject = stream;
+        };
+
+        function errorCallback(err) {
+        alert(err);
+        };
     }
     
     media.then(function(stream){
