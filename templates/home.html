@@ -4,7 +4,7 @@
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
 <script defer src="{{ url_for('static', filename='js/clmtrackr.js') }}"></script>
-<script defer src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/sample.js') }}"></script>
 {% endblock %}
 
 
@@ -14,6 +14,6 @@
     <canvas id="canvas" ></canvas>
 </div>
 <div>
-    hoge 2nd
+    <button id="startbutton" onclick="startVideo()">Start</button>
 </div>
 {% endblock %}
