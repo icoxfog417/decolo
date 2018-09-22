@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% set v_bulma = "0.7.1"%}
+{% set v_jquery = "3.3.1"%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,11 +9,14 @@
     <title>decolo</title>
     <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/{{v_bulma}}/css/bulma.min.css" />
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     {% block header %}{% endblock %}
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 </head>
 <body>
-    <section class="container">
+    <section class="container" style="height: 100%">
         {% block main %}{% endblock %}
     </section>
 </body>
