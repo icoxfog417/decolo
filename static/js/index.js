@@ -20,25 +20,19 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     var media = null;
     if (navigator.mediaDevices) {
         media = navigator.mediaDevices.getUserMedia({video : true});
+        alert("mediadevice")
     } else if (navigator.getUserMedia) {
-        //media = navigator.getUserMedia({video : true}, );
-        navigator.getUserMedia({audio : false, video : {
-            facingMode: "user" // フロントカメラにアクセス
-          }}, successCallback, errorCallback);
-        function successCallback(stream) {
-        video.srcObject = stream;
-        };
-
-        function errorCallback(err) {
-        alert(err);
-        };
+        media = navigator.getUserMedia({video : true});
+        alert("getusermedia")
     }
     
     media.then(function(stream){
         if ("srcObject" in video) {
             video.srcObject = stream;
+            alert("video source")
         } else {
             video.src = (window.URL && window.URL.createObjectURL(stream));
+            alert("src")
         }
         video.onloadedmetadata = function() {
             video.play();
