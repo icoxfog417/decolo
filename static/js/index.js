@@ -17,27 +17,6 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     ctracker.init();
     ctracker.start(video)
 
-    function gumSuccess( stream ) {
-        // add camera stream if getUserMedia succeeded
-        if ("srcObject" in vid) {
-            video.srcObject = stream;
-        } else {
-            video.src = (window.URL && window.URL.createObjectURL(stream));
-        }
-        vid.onloadedmetadata = function() {
-            adjustVideoProportions();
-            video.play();
-        }
-        vid.onresize = function() {
-            adjustVideoProportions();
-            if (trackingStarted) {
-                ctrack.stop();
-                ctrack.reset();
-                ctrack.start(vid);
-            }
-        }
-    }
-
     var media = navigator.mediaDevices.getUserMedia(
         {video: true, audio: false}
     )
