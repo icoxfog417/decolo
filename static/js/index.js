@@ -1,6 +1,7 @@
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
 
+
 window.requestAnimFrame = (function() {
     return window.requestAnimationFrame ||
            window.webkitRequestAnimationFrame ||
@@ -30,8 +31,10 @@ window.requestAnimFrame = (function() {
         media = navigator.mediaDevices.getUserMedia({video : {facingMode: "user"}});
     } else if (navigator.getUserMedia) {
         media = navigator.getUserMedia({video : true});
+    } else {
+        video.src = "./static/img/fall.mp4";
     }
-    
+
     media.then(function(stream){
         if ("srcObject" in video) {
             video.srcObject = stream;
@@ -42,6 +45,7 @@ window.requestAnimFrame = (function() {
             video.play();
         }
     }).catch(function(err){
+        video.src = "./static/img/fall.mp4";
         console.log(err);
     })
 

@@ -3,8 +3,6 @@
 
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
-<script defer src="{{ url_for('static', filename='js/clmtrackr.js') }}"></script>
-<script defer src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
 
 
@@ -15,7 +13,7 @@
         <canvas id="canvas" width="400" height="300"></canvas>
     </div>
 </div>
-<div>
-    <button id="startbutton" onclick="startVideo()">Start</button>
-</div>
+
+<script defer src="{{ url_for('static', filename='js/clmtrackr.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
