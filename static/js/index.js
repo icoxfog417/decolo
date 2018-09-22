@@ -13,10 +13,6 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     video.height = height;
     context = canvas.getContext("2d");
 
-    var ctracker = new clm.tracker();
-    ctracker.init();
-    ctracker.start(video)
-
     var media = null;
     if (navigator.mediaDevices) {
         media = navigator.mediaDevices.getUserMedia({video : {facingMode: "user"}});
@@ -40,14 +36,18 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     }).catch(function(err){
         console.log(err);
     })
-    /*
+    
     function drawLoop() {
         requestAnimationFrame(drawLoop);
         var positions = ctracker.getCurrentPosition();
         context.clearRect(0, 0, canvas.width, canvas.height);
         ctracker.draw(canvas);
     }
+
+    var ctracker = new clm.tracker();
+    ctracker.init();
+    ctracker.start(video)
+    video.play();
     drawLoop();
-    */
 
 })();
