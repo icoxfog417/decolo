@@ -20,13 +20,13 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     function gumSuccess( stream ) {
         // add camera stream if getUserMedia succeeded
         if ("srcObject" in vid) {
-            vid.srcObject = stream;
+            video.srcObject = stream;
         } else {
-            vid.src = (window.URL && window.URL.createObjectURL(stream));
+            video.src = (window.URL && window.URL.createObjectURL(stream));
         }
         vid.onloadedmetadata = function() {
             adjustVideoProportions();
-            vid.play();
+            video.play();
         }
         vid.onresize = function() {
             adjustVideoProportions();
@@ -39,7 +39,7 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     }
 
     var media = navigator.mediaDevices.getUserMedia(
-        {video: {facingMode: "user"}, audio: false}
+        {video: true, audio: false}
     )
     media.then(function(stream){
         if ("srcObject" in video) {
