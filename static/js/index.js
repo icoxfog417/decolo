@@ -49,7 +49,7 @@ window.requestAnimFrame = (function() {
         video.width = window.innerWidth;
         video.height = window.innerHeight;
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - 20;
+        canvas.height = window.innerHeight - 40;
         context = canvas.getContext("2d");
         ctracker.stop();
         ctracker.reset();
