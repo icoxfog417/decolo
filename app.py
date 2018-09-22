@@ -9,7 +9,8 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY",
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    name = request.args.get("name", default="You", type=str)
+    return render_template('home.html', name=name)
 
 
 if __name__ == '__main__':
