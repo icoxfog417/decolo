@@ -1,13 +1,6 @@
 
 var vid = document.getElementById('video');
 var overlay = document.getElementById('canvas');
-
-overlay.width = window.innerWidth;
-vid.width = window.innerWidth;
-var height = Math.round(vid.width / 4 * 3);
-overlay.height = height;
-vid.height = height;
-
 var vid_width = vid.width;
 var vid_height = vid.height;
 var overlayCC = overlay.getContext('2d');

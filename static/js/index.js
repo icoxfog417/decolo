@@ -1,34 +1,42 @@
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
 
+window.requestAnimFrame = (function() {
+    return window.requestAnimationFrame ||
+           window.webkitRequestAnimationFrame ||
+           window.mozRequestAnimationFrame ||
+           window.oRequestAnimationFrame ||
+           window.msRequestAnimationFrame ||
+           function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+             return window.setTimeout(callback, 1000/60);
+           };
+  })();
+
+
 (function() {
     var canvas = document.getElementById("canvas");
     var video = document.getElementById("video");
-    var context = canvas.getContext("2d");
 
-    canvas.width = window.innerWidth;
     video.width = window.innerWidth;
-    var height = Math.round(video.width / 4 * 3);
-    canvas.height = height;
-    video.height = height;
-    context = canvas.getContext("2d");
+    video.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var context = canvas.getContext("2d");
+    var ctracker = new clm.tracker();
 
     var media = null;
     if (navigator.mediaDevices) {
         media = navigator.mediaDevices.getUserMedia({video : {facingMode: "user"}});
-        alert("mediadevice")
     } else if (navigator.getUserMedia) {
         media = navigator.getUserMedia({video : true});
-        alert("getusermedia")
     }
     
     media.then(function(stream){
         if ("srcObject" in video) {
             video.srcObject = stream;
-            alert("video source")
         } else {
             video.src = (window.URL && window.URL.createObjectURL(stream));
-            alert("src")
         }
         video.onloadedmetadata = function() {
             video.play();
@@ -36,15 +44,27 @@ window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
     }).catch(function(err){
         console.log(err);
     })
+
+    $(window).resize(function(){
+        video.width = window.innerWidth;
+        video.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        context = canvas.getContext("2d");
+        ctracker.stop();
+        ctracker.reset();
+        ctracker.start(video);
+    })
     
     function drawLoop() {
-        requestAnimationFrame(drawLoop);
+        requestAnimFrame(drawLoop);
         var positions = ctracker.getCurrentPosition();
         context.clearRect(0, 0, canvas.width, canvas.height);
-        ctracker.draw(canvas);
+        if (ctracker.getCurrentPosition()) {
+            ctracker.draw(canvas);
+        }
     }
 
-    var ctracker = new clm.tracker();
     ctracker.init();
     ctracker.start(video)
     video.play();

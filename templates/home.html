@@ -9,9 +9,11 @@
 
 
 {% block main %}
-<div id="wrap">
-    <video id="video" autoplay playsinline></video>
-    <canvas id="canvas" ></canvas>
+<div id="container">
+    <div id="wrap">
+        <video id="video" muted autoplay playsinline width="400" height="300"></video>
+        <canvas id="canvas" width="400" height="300"></canvas>
+    </div>
 </div>
 <div>
     <button id="startbutton" onclick="startVideo()">Start</button>
