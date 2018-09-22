@@ -3,16 +3,26 @@
 
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+<link href="https://fonts.googleapis.com/css?family=Marcellus" rel="stylesheet">
 {% endblock %}
 
-
 {% block main %}
+
+<div class="msg-header">
+    <p>HogeHoge</p>
+</div>
+
 <div id="container">
     <div id="wrap">
         <video id="video" muted autoplay playsinline width="400" height="300"></video>
         <canvas id="canvas" width="400" height="300"></canvas>
     </div>
 </div>
+
+<div class="msg-footer">
+    <p>Welcome!</p>
+</div>
+<div class="footer-img"></div>
 
 <script defer src="{{ url_for('static', filename='js/clmtrackr.js') }}"></script>
 <script defer src="{{ url_for('static', filename='js/index.js') }}"></script>
