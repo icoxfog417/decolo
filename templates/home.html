@@ -25,5 +25,8 @@
 <div class="footer-img"></div>
 
 <script defer src="{{ url_for('static', filename='js/clmtrackr.min.js') }}"></script>
+<script>
+    var GENDER = {{gender}};
+</script>
 <script defer src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}

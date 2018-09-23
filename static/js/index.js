@@ -65,8 +65,38 @@ window.requestAnimFrame = (function() {
         var positions = ctracker.getCurrentPosition();
         context.clearRect(0, 0, canvas.width, canvas.height);
         if (ctracker.getCurrentPosition()) {
+            var image = new Image();
+            if(GENDER == 1){
+                image.src = "./static/img/crown_m.png";
+            }else{
+                image.src = "./static/img/crown_f.png";
+            }
             ctracker.draw(canvas);
+            drawStump(positions, image, [0, 9], 3);
         }
+    }
+
+    function drawStump(positions, image, location, scale){
+        var eyeWidth = positions[32][0] - positions[27][0];
+        var noseHeight = positions[62][1] - positions[33][1];
+
+        var eyeHeight = positions[32][1] - positions[27][1];
+        // calculate angle
+        var eyeAngle = Math.atan2(eyeWidth, eyeHeight);
+        
+        var imageWidth = eyeWidth * scale;
+        var imageHeight = image.height * (imageWidth / image.width);
+        
+        var measureX = eyeWidth / 2;
+        var measureY = noseHeight / 2;
+        var left = positions[62][0] + (location[0] * measureX) - (imageWidth /2);
+        var top = positions[62][1] - (location[1] * measureY) - (imageHeight /2);
+
+        //var left = left * Math.cos(eyeAngle) - top * Math.sin(eyeAngle);
+        //var top = left * Math.sin(eyeAngle) + top * Math.cos(eyeAngle);
+
+        context.drawImage(image, left, top, imageWidth, imageHeight);
+        console.log([eyeAngle, left, top, imageWidth, imageHeight]);
     }
 
     ctracker.init();
