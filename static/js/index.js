@@ -1,6 +1,17 @@
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
 
+var LOADING = function(){
+    var heart = new Image();
+    heart.src = "./static/img/heart.png";
+
+    return {
+        image: heart,
+        size: 70,
+        degree: 90
+    }
+}();
+
 
 window.requestAnimFrame = (function() {
     return window.requestAnimationFrame ||
@@ -71,9 +82,29 @@ window.requestAnimFrame = (function() {
             }else{
                 image.src = "./static/img/crown_f.png";
             }
-            ctracker.draw(canvas);
+            //ctracker.draw(canvas); //debug
             drawStump(positions, image, [0, 9], 3);
+        }else{
+            drawLoading();
         }
+    }
+
+    function drawLoading(){
+        LOADING.degree = (LOADING.degree + 1) % 360;
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius = centerX * 2 / 3;
+
+        var x = centerX + radius * Math.cos(LOADING.degree * Math.PI / 180);
+        var y = centerY + radius * Math.sin(LOADING.degree * Math.PI / 180);
+
+        var x2 = centerX + radius * Math.cos((LOADING.degree + 180) * Math.PI / 180);
+        var y2 = centerY + radius * Math.sin((LOADING.degree + 180) * Math.PI / 180);
+
+        var w = LOADING.size;
+        context.drawImage(LOADING.image, x - (w / 2), y - (w / 2), w, w);
+        context.drawImage(LOADING.image, x2 - (w / 2), y2 - (w / 2), w, w);
+
     }
 
     function drawStump(positions, image, location, scale){
@@ -96,7 +127,7 @@ window.requestAnimFrame = (function() {
         //var top = left * Math.sin(eyeAngle) + top * Math.cos(eyeAngle);
 
         context.drawImage(image, left, top, imageWidth, imageHeight);
-        console.log([eyeAngle, left, top, imageWidth, imageHeight]);
+        //console.log([eyeAngle, left, top, imageWidth, imageHeight]);
     }
 
     ctracker.init();
