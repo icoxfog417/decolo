@@ -25,8 +25,8 @@ def add_slide(pres, url, name):
 
     shapes = slide.shapes
     title_shape = shapes.title
-    title_shape.text = "カメラをオンにしてお楽しみください\n (なるべく水平に顔を映すと良いです)"
-    title_shape.text_frame.paragraphs[0].font.size = Pt(32)
+    title_shape.text = "QRコードからサイトにアクセスしてください\nアクセス後、カメラをオンにして顔を映して\nお楽しみください"
+    title_shape.text_frame.paragraphs[0].font.size = Pt(30)
     title_shape.text_frame.paragraphs[0].font.name = "メイリオ"
 
     with tempfile.NamedTemporaryFile(delete=False) as tmpf:
@@ -39,7 +39,7 @@ def add_slide(pres, url, name):
     p = tf.add_paragraph()
     p.text = name + "様"
     p.font.name = "メイリオ"
-    p.font.size = Pt(18)
+    p.font.size = Pt(28)
     p.alignment = PP_ALIGN.RIGHT
 
 
